@@ -53,15 +53,7 @@ export class BookResolver {
   async addBook(@Arg('book') inputBook: BookInput): Promise<Book> {
     return of(inputBook)
       .pipe(
-        map(newBook => {
-          const book: Book = {
-            id: Books.books.length,
-            name: newBook.name,
-            authorId: newBook.authorId,
-            createAt: new Date()
-          }
-          return book
-        }),
+        map(newBook => new Book(Books.books.length, newBook.authorId, newBook.name)),
         tap(
           newBook => Books.books.push(newBook)
         )
