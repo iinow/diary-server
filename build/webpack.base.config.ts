@@ -1,6 +1,7 @@
 import { smart } from 'webpack-merge'
 import webpack from 'webpack'
 import path from 'path'
+import ESLintPlugin from 'eslint-webpack-plugin'
 const nodeExternals = require('webpack-node-externals')
 
 const config: webpack.Configuration = smart({
@@ -32,7 +33,10 @@ const config: webpack.Configuration = smart({
       '~': path.resolve(__dirname, '../src/')
     }
   },
-  devtool: 'inline-source-map'
+  devtool: 'inline-source-map',
+  plugins: [
+    new ESLintPlugin()
+  ]
 })
 
 export interface Env {

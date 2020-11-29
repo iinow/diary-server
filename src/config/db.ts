@@ -1,8 +1,7 @@
 import { Connection, createConnection } from 'typeorm'
 import { from } from 'rxjs'
-import { map, tap } from 'rxjs/operators'
+import { tap } from 'rxjs/operators'
 import * as Model from '~/model'
-import { flatMap } from 'rxjs/internal/operators'
 import mysql from 'mysql2'
 
 let dbClient: Connection
