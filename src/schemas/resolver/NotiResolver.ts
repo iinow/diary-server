@@ -27,7 +27,7 @@ export class NotiResolver {
     @Arg('message', { nullable: true }) message?: string
   ): Promise<boolean> {
     const payload: NotificationPayload = {
-      id: this.autoIncrement + 1,
+      id: this.autoIncrement++,
       message,
     }
     await pubSub.publish('NOTIFICATIONS', payload)
@@ -39,7 +39,7 @@ export class NotiResolver {
     @PubSub('NOTIFICATIONS') publish: Publisher<NotificationPayload>,
     @Arg('message', { nullable: true }) message?: string
   ): Promise<boolean> {
-    await publish({ id: this.autoIncrement + 1, message })
+    await publish({ id: this.autoIncrement++, message })
     return true
   }
 
@@ -55,9 +55,10 @@ export class NotiResolver {
     filter: ({ payload }: ResolverFilterData<NotificationPayload>) =>
       payload.id % 2 === 0,
   })
-  subscriptionWithFilter(@Root() { id, message }: NotificationPayload) {
-    const newNotification: Notification = { id, message, date: new Date() }
-    return newNotification
+  subscriptionWithFilter(
+    @Root() { id, message }: NotificationPayload
+  ): Notification {
+    return { id, message, date: new Date() }
   }
 
   @Mutation(() => Boolean)
@@ -66,7 +67,7 @@ export class NotiResolver {
     @Arg('topic') topic: string,
     @Arg('message', { nullable: true }) message?: string
   ): Promise<boolean> {
-    const payload: NotificationPayload = { id: this.autoIncrement + 1, message }
+    const payload: NotificationPayload = { id: this.autoIncrement++, message }
     await pubSub.publish(topic, payload)
     return true
   }

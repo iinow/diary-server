@@ -14,7 +14,11 @@ import { flatMap } from 'rxjs/internal/operators'
 
   const apollo = new ApolloServer({
     schema: buildSchemaSync({
-      resolvers: [Resolvers.DiaryResolver],
+      resolvers: [
+        Resolvers.DiaryResolver,
+        Resolvers.NotiResolver,
+        Resolvers.MessageResolver,
+      ],
     }),
     subscriptions: {
       path: '/sub',
