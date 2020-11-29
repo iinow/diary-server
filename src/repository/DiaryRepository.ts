@@ -1,9 +1,7 @@
 import { EntityRepository, Repository } from 'typeorm'
-import { Diary } from '~/model'
+import { Diary } from '@/model'
 
 @EntityRepository(Diary)
-class DiaryRepository extends Repository<Diary> {
-
-}
+class DiaryRepository extends Repository<Diary> {}
 
 export default DiaryRepository

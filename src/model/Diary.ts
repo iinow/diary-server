@@ -1,4 +1,4 @@
-import { ObjectType, Field, Int} from 'type-graphql'
+import { ObjectType, Field, Int } from 'type-graphql'
 import {
   BaseEntity,
   Column,
@@ -6,16 +6,15 @@ import {
   Entity,
   ManyToOne,
   PrimaryGeneratedColumn,
-  UpdateDateColumn
+  UpdateDateColumn,
 } from 'typeorm'
-import { User } from './User'
+import { User } from '@/model/User'
 
 @Entity({
-  schema: 'diary'
+  schema: 'diary',
 })
 @ObjectType({ description: '일기' })
 export class Diary extends BaseEntity {
-
   @PrimaryGeneratedColumn()
   @Field(() => Int)
   id!: number
@@ -29,7 +28,7 @@ export class Diary extends BaseEntity {
 
   @UpdateDateColumn({ name: 'updated_at' })
   @Field(() => Date)
-  updatedAt!: Date;
+  updatedAt!: Date
 
   @CreateDateColumn({ name: 'created_at' })
   @Field(() => Date)

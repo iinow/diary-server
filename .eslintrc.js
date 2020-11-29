@@ -3,18 +3,20 @@ module.exports = {
     browser: true,
     es2021: true,
   },
-  extends: [
-    'airbnb-base',
-  ],
+  extends: ['airbnb-base', 'prettier'],
   parser: '@typescript-eslint/parser',
   parserOptions: {
     ecmaVersion: 12,
     sourceType: 'module',
   },
-  plugins: [
-    '@typescript-eslint',
-  ],
+  plugins: ['@typescript-eslint', 'prettier'],
   rules: {
-    semi: false
+    semi: 'off',
+    'import/prefer-default-export': 'off',
+    'class-methods-use-this': 'off',
+    'no-return-assign': 'off',
+    'import/no-unresolved': 'off',
+    'prettier/prettier': 'error',
+    'prefer-spread': 'off',
   },
-};
+}

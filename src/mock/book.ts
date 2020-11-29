@@ -1,5 +1,5 @@
 import chance from 'chance'
-import { Book } from '~/model'
+import { Book } from '@/model'
 
 const mock = chance()
 
@@ -14,10 +14,10 @@ const books: Book[] = Array.apply(null, Array(5)).map(
 
 const authors: Author[] = Array.apply(null, Array(5)).map((v, index) => ({
   id: index,
-  name: mock.name()
+  name: mock.name(),
 }))
 
 export default {
   books,
-  authors
+  authors,
 }

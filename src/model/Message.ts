@@ -4,22 +4,27 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  ManyToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm'
+import { User } from '@/model/User'
 
 @Entity({
-  schema: 'user',
+  schema: 'messages',
 })
-@ObjectType({ description: '사용자' })
-export class User extends BaseEntity {
+@ObjectType({ description: '메시지 타입 정의' })
+export class Message extends BaseEntity {
   @PrimaryGeneratedColumn()
   @Field(() => Int)
   id!: number
 
+  @ManyToOne(() => User)
+  user!: User
+
   @Column()
-  @Field({ name: 'user_id' })
-  userId!: string
+  @Field()
+  text!: string
 
   @UpdateDateColumn({ name: 'updated_at' })
   @Field(() => Date)
@@ -29,5 +34,3 @@ export class User extends BaseEntity {
   @Field(() => Date)
   createAt!: Date
 }
-
-export default User

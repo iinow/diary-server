@@ -1,10 +1,10 @@
 import express from 'express'
 
-let router = express.Router()
+const router = express.Router()
 
 router.get('/', (req, res) => {
   res.json({
-    name: 'dhfkdhfkdhfk'
+    name: 'dhfkdhfkdhfk',
   })
 })
 

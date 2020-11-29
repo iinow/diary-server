@@ -8,9 +8,9 @@ import {
   Resolver,
   ResolverFilterData,
   Root,
-  Subscription
+  Subscription,
 } from 'type-graphql'
-import { NotificationPayload, Notification } from '~/model'
+import { NotificationPayload, Notification } from '@/model'
 
 @Resolver()
 export class NotiResolver {
@@ -27,8 +27,8 @@ export class NotiResolver {
     @Arg('message', { nullable: true }) message?: string
   ): Promise<boolean> {
     const payload: NotificationPayload = {
-      id: ++this.autoIncrement,
-      message
+      id: this.autoIncrement + 1,
+      message,
     }
     await pubSub.publish('NOTIFICATIONS', payload)
     return true
@@ -39,37 +39,40 @@ export class NotiResolver {
     @PubSub('NOTIFICATIONS') publish: Publisher<NotificationPayload>,
     @Arg('message', { nullable: true }) message?: string
   ): Promise<boolean> {
-    await publish({ id: ++this.autoIncrement, message })
+    await publish({ id: this.autoIncrement + 1, message })
     return true
   }
 
   @Subscription({ topics: 'NOTIFICATIONS' })
-  normalSubscription(@Root() { id, message }: NotificationPayload): Notification {
+  normalSubscription(
+    @Root() { id, message }: NotificationPayload
+  ): Notification {
     return { id, message, date: new Date() }
   }
 
   @Subscription(() => Notification, {
     topics: 'NOTIFICATIONS',
-    filter: ({ payload }: ResolverFilterData<NotificationPayload>) => payload.id % 2 === 0
+    filter: ({ payload }: ResolverFilterData<NotificationPayload>) =>
+      payload.id % 2 === 0,
   })
   subscriptionWithFilter(@Root() { id, message }: NotificationPayload) {
     const newNotification: Notification = { id, message, date: new Date() }
     return newNotification
   }
 
-  @Mutation(returns => Boolean)
+  @Mutation(() => Boolean)
   async pubSubMutationToDynamicTopic(
     @PubSub() pubSub: PubSubEngine,
     @Arg('topic') topic: string,
     @Arg('message', { nullable: true }) message?: string
   ): Promise<boolean> {
-    const payload: NotificationPayload = { id: ++this.autoIncrement, message }
+    const payload: NotificationPayload = { id: this.autoIncrement + 1, message }
     await pubSub.publish(topic, payload)
     return true
   }
 
   @Subscription({
-    topics: ({ args }) => args.topic
+    topics: ({ args }) => args.topic,
   })
   subscriptionWithFilterToDynamicTopic(
     @Arg('topic') topic: string,

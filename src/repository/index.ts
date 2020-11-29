@@ -1,2 +1,3 @@
-export { default as BookRepository } from './BookRepository'
-export { default as DiaryRepository } from './DiaryRepository'
+export { default as BookRepository } from '@/repository/BookRepository'
+export { default as DiaryRepository } from '@/repository/DiaryRepository'
+export { default as MessageRepository } from '@/repository/MessageRepository'

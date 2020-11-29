@@ -1,8 +1,7 @@
 import { Connection, createConnection } from 'typeorm'
 import { from } from 'rxjs'
 import { tap } from 'rxjs/operators'
-import * as Model from '~/model'
-import mysql from 'mysql2'
+import * as Model from '@/model'
 
 let dbClient: Connection
 
@@ -23,10 +22,10 @@ const init = () => {
       dropSchema: true,
       synchronize: true,
       logging: true,
-      entities: [Model.Book, Model.Diary, Model.User]
+      entities: [Model.Book, Model.Diary, Model.User],
     })
   )
-    .pipe(tap(con => (dbClient = con)))
+    .pipe(tap((con) => (dbClient = con)))
     .toPromise()
 }
 
