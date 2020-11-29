@@ -3,7 +3,7 @@ import {
   BaseEntity,
   Column,
   CreateDateColumn,
-  Entity, JoinColumn,
+  Entity,
   ManyToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn
@@ -35,3 +35,5 @@ export class Diary extends BaseEntity {
   @Field(() => Date)
   createAt!: Date
 }
+
+export default Diary

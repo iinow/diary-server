@@ -1,21 +1,23 @@
 import express from 'express'
 import { ApolloServer } from 'apollo-server-express'
 import { buildSchemaSync } from 'type-graphql'
-import { BookResolver, NotiResolver } from '~/schemas/resolver'
+import * as Resolvers from '~/schemas/resolver'
 import { createServer } from 'http'
 import 'reflect-metadata'
 import init from './config/db'
 import { from } from 'rxjs'
 import { map } from 'rxjs/operators'
 import * as Model from '~/model'
-import { flatMap } from 'rxjs/internal/operators'
+import { flatMap } from 'rxjs/internal/operators';
+import {DiaryRepository} from "~/repository";
+import { getCustomRepository } from 'typeorm'
 
-;(async () => {
+(async () => {
   let app = express()
 
   const apollo = new ApolloServer({
     schema: buildSchemaSync({
-      resolvers: [BookResolver, NotiResolver]
+      resolvers: [Resolvers.DiaryResolver]
     }),
     subscriptions: {
       path: '/sub'
@@ -62,7 +64,7 @@ async function test() {
   const diaries = await from(init())
     .pipe(
       map(con => con.getRepository(Model.Diary)),
-      flatMap(repo => repo.find())
+      flatMap(repo => repo.find({relations: ['user']}))
     )
     .toPromise()
   console.log('d', diaries[0].user)

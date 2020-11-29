@@ -1,0 +1,12 @@
+{
+  "local": {
+    "host": "localhost",
+    "user": "root",
+    "password": "qlalfqjsghekd",
+    "database": "routing_d",
+    "port": 3307,
+    "driver": "mysql",
+    "multipleStatements": true
+  },
+  "sql-file": true
+}

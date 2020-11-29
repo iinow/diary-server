@@ -4,11 +4,9 @@ import {
   Column,
   CreateDateColumn,
   Entity,
-  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn
 } from 'typeorm'
-import {Diary} from "~/model/Diary";
 
 @Entity({
   schema: 'user'
@@ -24,12 +22,9 @@ export class User extends BaseEntity {
   @Field({ name: 'user_id' })
   userId!: string
 
-  // @OneToMany(() => Diary, diaries => diaries.user)
-  // diaries?: Diary[]
-
   @UpdateDateColumn({ name: 'updated_at' })
   @Field(() => Date)
-  updatedAt!: Date;
+  updatedAt!: Date
 
   @CreateDateColumn({ name: 'created_at' })
   @Field(() => Date)
