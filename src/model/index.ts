@@ -1,5 +1,5 @@
 export { Book } from '@/model/Book'
 export { User } from '@/model/User'
 export { Diary } from '@/model/Diary'
-export { Message } from '@/model/Message'
+export { Message, MessagePayload } from '@/model/Message'
 export * from '@/model/Noti'

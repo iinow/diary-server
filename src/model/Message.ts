@@ -34,3 +34,9 @@ export class Message extends BaseEntity {
   @Field(() => Date)
   createAt!: Date
 }
+
+export interface MessagePayload {
+  id: number
+  text: string
+  createAt: Date
+}
