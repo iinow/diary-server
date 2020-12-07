@@ -6,6 +6,7 @@ import ESLintPlugin from 'eslint-webpack-plugin'
 const nodeExternals = require('webpack-node-externals')
 
 const config: webpack.Configuration = smart({
+  target: 'node',
   name: 'server',
   mode: 'none',
   entry: {
@@ -42,11 +43,13 @@ export interface Env {
   serverPort: number
   redisHost: string
   redisPort: number
+  dbType: 'mysql' | 'mariadb'
   mysqlHost: string
   mysqlUsername: string
   mysqlPassword: string
   mysqlPort: number
   mysqlDatabase: string
+  dropSchema: boolean
 }
 
 export { config as baseConfig }

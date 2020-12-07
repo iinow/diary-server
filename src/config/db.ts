@@ -11,15 +11,14 @@ const init = () => {
   }
   return from(
     createConnection({
-      type: 'mysql',
+      type: process.env.dbType,
       charset: 'utf8mb4',
-      url: '127.0.0.1',
       port: process.env.mysqlPort,
       username: process.env.mysqlUsername,
       password: process.env.mysqlPassword,
       database: process.env.mysqlDatabase,
       host: process.env.mysqlHost,
-      dropSchema: true,
+      dropSchema: process.env.dropSchema,
       synchronize: true,
       logging: true,
       entities: [Model.Book, Model.Diary, Model.User, Model.Message],
