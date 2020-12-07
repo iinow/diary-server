@@ -1,15 +1,21 @@
-import { Env, baseConfig } from './webpack.base.config'
 import { smart } from 'webpack-merge'
 import webpack from 'webpack'
-const NodemonPlugin = require('nodemon-webpack-plugin')
+import { Env, baseConfig } from './webpack.base.config'
+
+const env: Env = {
+  serverPort: 7711,
+  redisHost: 'localhost',
+  redisPort: 6379,
+  mysqlDatabase: 'diary',
+  mysqlHost: 'localhost',
+  mysqlPassword: 'qweqweqwe2!',
+  mysqlPort: 3307,
+  mysqlUsername: 'root',
+}
 
 const config = smart({
   mode: 'development',
-  plugins: [
-    new webpack.EnvironmentPlugin({
-      APP_NAME: 'local...'
-    })
-  ]
+  plugins: [new webpack.EnvironmentPlugin(env)],
 })
 
 module.exports = smart(baseConfig, config)

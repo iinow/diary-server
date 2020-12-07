@@ -7,6 +7,11 @@ const env: Env = {
   serverPort: 7711,
   redisHost: 'localhost',
   redisPort: 6379,
+  mysqlDatabase: 'diary',
+  mysqlHost: 'localhost',
+  mysqlPassword: 'qlalfqjsghekd',
+  mysqlPort: 3307,
+  mysqlUsername: 'root',
 }
 
 const config = smart({
