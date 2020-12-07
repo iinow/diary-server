@@ -1,6 +1,6 @@
 import express from 'express'
 import { ApolloServer } from 'apollo-server-express'
-import { buildSchemaSync } from 'type-graphql'
+import { buildSchemaSync, buildSchema } from 'type-graphql'
 import * as Resolvers from '@/schemas/resolver'
 import { createServer } from 'http'
 import 'reflect-metadata'
@@ -9,34 +9,7 @@ import { from } from 'rxjs'
 import { map } from 'rxjs/operators'
 import * as Model from '@/model'
 import { flatMap } from 'rxjs/internal/operators'
-;(async () => {
-  const app = express()
-
-  const apollo = new ApolloServer({
-    schema: buildSchemaSync({
-      resolvers: [
-        Resolvers.DiaryResolver,
-        Resolvers.NotiResolver,
-        Resolvers.MessageResolver,
-      ],
-    }),
-    subscriptions: {
-      path: '/sub',
-    },
-    playground: true,
-    context: ({ req, res }) => ({ req, res }),
-  })
-  //
-  apollo.applyMiddleware({ app })
-
-  const httpServer = createServer(app)
-  apollo.installSubscriptionHandlers(httpServer)
-
-  httpServer.listen(process.env.serverPort, () => {
-    console.log(`server listen!!, port: ${process.env.serverPort}`)
-    test()
-  })
-})()
+import { pubSub } from '@/config'
 
 async function test() {
   const user = await from(init())
@@ -70,3 +43,35 @@ async function test() {
     .toPromise()
   console.log('d', diaries[0].user)
 }
+
+async function bootstrap() {
+  const app = express()
+
+  const apollo = new ApolloServer({
+    schema: buildSchemaSync({
+      resolvers: [
+        Resolvers.DiaryResolver,
+        Resolvers.NotiResolver,
+        Resolvers.MessageResolver,
+      ],
+      pubSub,
+    }),
+    subscriptions: {
+      path: '/sub',
+    },
+    playground: true,
+    context: ({ req, res }) => ({ req, res }),
+  })
+  //
+  apollo.applyMiddleware({ app })
+
+  const httpServer = createServer(app)
+  apollo.installSubscriptionHandlers(httpServer)
+
+  httpServer.listen(process.env.serverPort, () => {
+    console.log(`server listen!!, port: ${process.env.serverPort}`)
+    test()
+  })
+}
+
+bootstrap()

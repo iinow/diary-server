@@ -1,1 +1,1 @@
-export { default as RedisClient } from './redis'
+export { default as RedisClient, pubSub } from '@/config/redis'

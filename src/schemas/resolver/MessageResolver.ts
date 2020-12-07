@@ -12,6 +12,7 @@ import { Message } from '@/model'
 import { from } from 'rxjs'
 import { map, tap } from 'rxjs/operators'
 import { flatMap } from 'rxjs/internal/operators'
+import { MessageOut } from '@/schemas/out/MessageOut'
 
 @Resolver(Message)
 export class MessageResolver {
@@ -35,11 +36,15 @@ export class MessageResolver {
       .toPromise()
   }
 
-  @Subscription(() => Message, { topics: ({ args }) => args.topic })
-  subscriptionMessage(
-    @Arg('topic') topic: string,
-    @Root() messages: Message
-  ): Message {
-    return messages
-  }
+  // @Subscription(() => MessageOut, { topics: ({ args }) => args.topic })
+  // subscriptionMessage(
+  //   @Arg('topic') topic: string,
+  //   @Root() messages: Message
+  // ): any {
+  //   return new MessageOut(
+  //     messages.text,
+  //     new Date(messages.createAt.toDateString()),
+  //     new Date(messages.updatedAt.toDateString())
+  //   )
+  // }
 }
