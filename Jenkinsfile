@@ -6,6 +6,6 @@ node {
   stage('build') {
     echo '${params.profiles build!!!}'
     sh "sudo npm i"
-    sh "sudo npm run:${params.profiles}"
+    sh "sudo npm run build:${params.profiles}"
   }
 }
