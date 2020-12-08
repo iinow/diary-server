@@ -1,4 +1,4 @@
-node('deploy') {
+pipeline {
   parameters {
     string(name: 'profiles', defaultValue: 'dev', description: '빌드 환경')
   }
