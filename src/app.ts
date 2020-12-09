@@ -1,7 +1,7 @@
 import express from 'express'
 import { ApolloServer } from 'apollo-server-express'
-import { buildSchemaSync, buildSchema } from 'type-graphql'
-import * as Resolvers from '@/schemas/resolver'
+import { buildSchemaSync } from 'type-graphql'
+import Resolvers from '@/schemas/resolver'
 import { createServer } from 'http'
 import 'reflect-metadata'
 import init from '@/config/db'
@@ -49,11 +49,7 @@ async function bootstrap() {
 
   const apollo = new ApolloServer({
     schema: buildSchemaSync({
-      resolvers: [
-        Resolvers.DiaryResolver,
-        Resolvers.NotiResolver,
-        Resolvers.MessageResolver,
-      ],
+      resolvers: ([...Resolvers] as unknown) as [Function, ...Function[]],
       pubSub,
     }),
     subscriptions: {

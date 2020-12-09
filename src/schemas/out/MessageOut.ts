@@ -1,6 +1,6 @@
-import { Field, InputType } from 'type-graphql'
+import { Field, ObjectType } from 'type-graphql'
 
-@InputType('메시지 내용')
+@ObjectType()
 export class MessageOut {
   constructor(text: string, createdAt: Date, updatedAt: Date) {
     this.text = text
