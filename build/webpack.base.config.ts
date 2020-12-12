@@ -53,6 +53,7 @@ export interface Env {
   oauthKakaoClientId: string
   oauthKakaoClientSecret: string
   oauthKakaoCallbackUrl: string
+  jwtSecret: string
 }
 
 export { config as baseConfig }

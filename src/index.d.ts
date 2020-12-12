@@ -13,5 +13,6 @@ declare namespace NodeJS {
     oauthKakaoClientId: string
     oauthKakaoClientSecret: string
     oauthKakaoCallbackUrl: string
+    jwtSecret: string
   }
 }

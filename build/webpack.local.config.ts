@@ -18,6 +18,7 @@ const env: Env = {
   oauthKakaoClientId: '2d757aa5c6d0840f1d941423b5fe0ff1',
   oauthKakaoClientSecret: '5CWqDOhlz3wnJd17RR1rwYLMfGMamhUh',
   oauthKakaoCallbackUrl: 'http://localhost:7711/oauth/kakao/callback',
+  jwtSecret: 'HAHAHA',
 }
 
 const config = smart({
