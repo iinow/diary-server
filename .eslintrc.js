@@ -19,4 +19,5 @@ module.exports = {
     'prettier/prettier': 'error',
     'prefer-spread': 'off',
   },
+  ignorePatterns: ['node_modules/', 'dist/', 'build/_db/migrations/'],
 }

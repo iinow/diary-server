@@ -13,6 +13,9 @@ const env: Env = {
   mysqlPort: 3306,
   mysqlUsername: 'root',
   dropSchema: false,
+  oauthKakaoClientId: '2d757aa5c6d0840f1d941423b5fe0ff1',
+  oauthKakaoClientSecret: '5CWqDOhlz3wnJd17RR1rwYLMfGMamhUh',
+  oauthKakaoCallbackUrl: 'http://localhost:7711/oauth/kakao/callback',
 }
 
 const config = smart({

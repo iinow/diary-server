@@ -10,5 +10,8 @@ declare namespace NodeJS {
     mysqlPort: number
     mysqlDatabase: string
     dropSchema: boolean
+    oauthKakaoClientId: string
+    oauthKakaoClientSecret: string
+    oauthKakaoCallbackUrl: string
   }
 }

@@ -1,0 +1,23 @@
+{
+  "editor.formatOnSave": true,
+  "prettier.enable": true,
+  "editor.tabSize": 2,
+  "files.exclude": {
+    "node_modules/": true,
+    "typings/": true,
+    "target/": true,
+    ".settings/": true
+  },
+  "eslint.format.enable": true,
+  "eslint.validate": ["typescript", "svelte"],
+  "eslint.alwaysShowStatus": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll": true,
+    "source.fixAll.eslint": true
+  },
+  "files.autoSave": "onFocusChange",
+  "eslint.workingDirectories": ["./"],
+  "[typescript]": {
+    "editor.formatOnSave": true
+  }
+}

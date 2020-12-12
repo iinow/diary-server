@@ -1,10 +1,11 @@
-import { ObjectType, Field, Int } from 'type-graphql'
+import { Provider } from '@/common/constants'
+import { ObjectType, Field } from 'type-graphql'
 import {
   BaseEntity,
   Column,
   CreateDateColumn,
   Entity,
-  PrimaryGeneratedColumn,
+  PrimaryColumn,
   UpdateDateColumn,
 } from 'typeorm'
 
@@ -13,13 +14,21 @@ import {
 })
 @ObjectType({ description: '사용자' })
 export class User extends BaseEntity {
-  @PrimaryGeneratedColumn()
-  @Field(() => Int)
-  id!: number
+  @PrimaryColumn({ name: 'uid' })
+  @Field(() => String)
+  uid!: string
 
-  @Column()
-  @Field({ name: 'user_id' })
+  @Column({ name: 'user_id' })
+  @Field(() => String)
   userId!: string
+
+  @Column({ name: 'user_name' })
+  @Field(() => String)
+  userName!: string
+
+  @Column({ name: 'provider' })
+  @Field()
+  provider!: Provider
 
   @UpdateDateColumn({ name: 'updated_at' })
   @Field(() => Date)

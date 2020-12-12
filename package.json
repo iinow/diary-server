@@ -42,7 +42,8 @@
     "reflect-metadata": "^0.1.13",
     "rxjs": "^6.6.3",
     "type-graphql": "^1.0.0",
-    "typeorm": "^0.2.26"
+    "typeorm": "^0.2.26",
+    "uuid": "^8.3.2"
   },
   "devDependencies": {
     "@apollo/client": "^3.2.9",
@@ -56,6 +57,7 @@
     "@types/passport": "^1.0.4",
     "@types/passport-kakao": "^0.2.0",
     "@types/redis": "^2.8.28",
+    "@types/uuid": "^8.3.0",
     "@types/webpack": "^4.41.13",
     "@types/webpack-merge": "^4.1.5",
     "@typescript-eslint/eslint-plugin": "^4.8.2",

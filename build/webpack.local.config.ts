@@ -1,6 +1,7 @@
 import { smart } from 'webpack-merge'
 import webpack from 'webpack'
 import { Env, baseConfig } from './webpack.base.config'
+
 const NodemonPlugin = require('nodemon-webpack-plugin')
 
 const env: Env = {
@@ -14,6 +15,9 @@ const env: Env = {
   mysqlPort: 3307,
   mysqlUsername: 'root',
   dropSchema: true,
+  oauthKakaoClientId: '2d757aa5c6d0840f1d941423b5fe0ff1',
+  oauthKakaoClientSecret: '5CWqDOhlz3wnJd17RR1rwYLMfGMamhUh',
+  oauthKakaoCallbackUrl: 'http://localhost:7711/oauth/kakao/callback',
 }
 
 const config = smart({

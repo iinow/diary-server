@@ -50,6 +50,9 @@ export interface Env {
   mysqlPort: number
   mysqlDatabase: string
   dropSchema: boolean
+  oauthKakaoClientId: string
+  oauthKakaoClientSecret: string
+  oauthKakaoCallbackUrl: string
 }
 
 export { config as baseConfig }
