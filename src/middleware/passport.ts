@@ -5,6 +5,7 @@ import jwt from 'jsonwebtoken'
 import { AUTH_TOKEN_NAME, Provider } from '@/common/constants'
 import { register } from '@/service/UserService'
 import { User } from '@/model'
+import { getJwtObject } from '@/model/type/JwtObject'
 
 passport.use(
   'login-kakao',
@@ -44,13 +45,7 @@ function init(app: Express) {
     (req, res) => {
       const user = req.user as User
       if (user) {
-        const token = jwt.sign(
-          {
-            uid: user.uid,
-            provider: user.provider,
-          },
-          process.env.jwtSecret
-        )
+        const token = jwt.sign(getJwtObject(user), process.env.jwtSecret)
         res.cookie(AUTH_TOKEN_NAME, token)
         res.redirect('http://localhost:3000')
         return

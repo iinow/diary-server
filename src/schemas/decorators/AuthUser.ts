@@ -6,8 +6,6 @@ type Context = {
   res: Response
 }
 
-export default function DToken() {
-  return createParamDecorator<Context>(
-    ({ context }) => context.req.cookies.user
-  )
+export default function AuthUser() {
+  return createParamDecorator<Context>(({ context }) => context.req.user)
 }
