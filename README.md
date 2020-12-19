@@ -1,12 +1,19 @@
-# express + typescript template
+# Diary Server
 
 ## 구성 
 
-1. typescript 
-2. express 
-3. graphql 
-4. apollo 
-5. type graphql
+* typescript 
+* express 
+* graphql 
+* apollo 
+* type-graphql
+* typeorm
+
+## 기능
+
+* 일기는 하루에 1개만 작성 가능 저장 버튼을 누르지 않고 자동 저장
+* 메신저 기능
+* WebRTC 
 
 ## graphql 설정 방법
 

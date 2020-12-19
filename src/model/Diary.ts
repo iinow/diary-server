@@ -4,6 +4,7 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  JoinColumn,
   ManyToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
@@ -19,11 +20,17 @@ export class Diary extends BaseEntity {
   @Field(() => Int)
   id!: number
 
-  @ManyToOne(() => User)
+  @ManyToOne(() => User, {
+    onDelete: 'NO ACTION',
+    onUpdate: 'NO ACTION',
+    eager: false,
+    lazy: true,
+  })
+  @JoinColumn([{ name: 'user_uid', referencedColumnName: 'uid' }])
   user!: User
 
   @Column({ name: 'content' })
-  @Field()
+  @Field(() => String)
   content!: string
 
   @UpdateDateColumn({ name: 'updated_at' })
@@ -32,7 +39,7 @@ export class Diary extends BaseEntity {
 
   @CreateDateColumn({ name: 'created_at' })
   @Field(() => Date)
-  createAt!: Date
+  createdAt!: Date
 }
 
 export default Diary

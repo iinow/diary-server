@@ -21,7 +21,12 @@ export default (app: Express) => {
         'request.credentials': 'include',
       },
     },
+    debug: false,
     context: ({ req, res }) => ({ req, res }),
+    formatError: (err) => {
+      console.log('에러 발생!', err.originalError)
+      return err
+    },
   })
 
   apollo.applyMiddleware({ app })
