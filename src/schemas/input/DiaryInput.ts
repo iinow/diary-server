@@ -1,5 +1,4 @@
 import { Field, InputType } from 'type-graphql'
-import moment from 'moment'
 
 @InputType()
 export class DiaryInput {
@@ -8,11 +7,4 @@ export class DiaryInput {
 
   @Field()
   content!: string
-
-  @Field()
-  yyyyMMdd!: string
-
-  toDate(): Date {
-    return moment(this.yyyyMMdd, 'YYYYMMDD').toDate()
-  }
 }

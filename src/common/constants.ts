@@ -10,3 +10,7 @@ registerEnumType(Provider, {
   name: 'Provider',
   description: 'OAuth Provider',
 })
+
+export enum ErrorType {
+  UN_AUTH = '4010',
+}

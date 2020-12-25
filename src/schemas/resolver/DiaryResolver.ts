@@ -1,16 +1,20 @@
 import { Resolver, Query, Mutation, Arg, Authorized } from 'type-graphql'
-import { from, of } from 'rxjs'
+import { from, of, throwError } from 'rxjs'
+import { flatMap } from 'rxjs/internal/operators'
+import { map, tap } from 'rxjs/operators'
 import { Diary, User } from '@/model'
-import { map } from 'rxjs/operators'
 import { DiaryInput } from '@/schemas/input'
 import { AuthUser } from '@/schemas/decorators'
-import { flatMap } from 'rxjs/internal/operators'
+import { InsertAndUpdateDiaryOut } from '@/schemas/out'
+import { UnAuthorizeError } from '@/error'
 
 @Resolver()
 export class DiaryResolver {
   @Query(() => [Diary], { nullable: true })
   diaries(): Promise<Diary[]> {
-    return from(Diary.find({ relations: ['user'] })).toPromise()
+    return from(Diary.find({ relations: ['user'] }))
+      .pipe()
+      .toPromise()
   }
 
   @Query(() => Diary, { nullable: true })
@@ -31,15 +35,20 @@ export class DiaryResolver {
     return of({})
       .pipe(
         flatMap(() =>
-          Diary.getRepository()
-            .createQueryBuilder('diary')
-            .leftJoinAndSelect('diary.user', 'user')
-            .where(`date_format(diary.created_at, '%Y%m%d') = (:yyyyMMdd)`, {
-              yyyyMMdd,
-            })
-            .andWhere('user_uid = (:uid)', { uid: user.uid })
-            .limit(1)
-            .getRawAndEntities()
+          user === undefined
+            ? throwError(new UnAuthorizeError())
+            : Diary.getRepository()
+                .createQueryBuilder('diary')
+                .leftJoinAndSelect('diary.user', 'user')
+                .where(
+                  `date_format(diary.created_at, '%Y%m%d') = (:yyyyMMdd)`,
+                  {
+                    yyyyMMdd,
+                  }
+                )
+                .andWhere('user_uid = (:uid)', { uid: user.uid })
+                .limit(1)
+                .getRawAndEntities()
         ),
         map((data) =>
           data.entities.length !== 0 ? data.entities[0] : undefined
@@ -49,11 +58,11 @@ export class DiaryResolver {
   }
 
   @Authorized()
-  @Mutation(() => Date)
+  @Mutation(() => InsertAndUpdateDiaryOut)
   insertAndUpdateDiary(
     @Arg('diary') diaryInput: DiaryInput,
     @AuthUser() user: User
-  ): Promise<Date> {
+  ): Promise<InsertAndUpdateDiaryOut> {
     return of(diaryInput)
       .pipe(
         flatMap((diary: DiaryInput) => {
@@ -67,13 +76,12 @@ export class DiaryResolver {
           if (newDiary === undefined || newDiary.id === undefined) {
             newDiary = Diary.create()
             newDiary.user = user
-            newDiary.createdAt = diaryInput.toDate()
           }
           newDiary.content = diaryInput.content
           return newDiary
         }),
         flatMap((diary) => diary.save()),
-        map((diary) => diary.updatedAt)
+        map((diary) => new InsertAndUpdateDiaryOut(diary))
       )
       .toPromise()
   }

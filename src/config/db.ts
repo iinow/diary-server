@@ -19,6 +19,7 @@ const init = () => {
       database: process.env.mysqlDatabase,
       host: process.env.mysqlHost,
       dropSchema: process.env.dropSchema,
+      timezone: 'Z',
       synchronize: true,
       logging: true,
       entities: [Model.Book, Model.Diary, Model.User, Model.Message],
