@@ -1,7 +1,7 @@
 import { Resolver, Query, Mutation, Arg, Authorized } from 'type-graphql'
 import { from, of, throwError } from 'rxjs'
 import { flatMap } from 'rxjs/internal/operators'
-import { map, tap } from 'rxjs/operators'
+import { map } from 'rxjs/operators'
 import { Diary, User } from '@/model'
 import { DiaryInput } from '@/schemas/input'
 import { AuthUser } from '@/schemas/decorators'
@@ -77,6 +77,7 @@ export class DiaryResolver {
             newDiary = Diary.create()
             newDiary.user = user
           }
+          newDiary.title = diaryInput.title
           newDiary.content = diaryInput.content
           return newDiary
         }),

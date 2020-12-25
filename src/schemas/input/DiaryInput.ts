@@ -6,5 +6,8 @@ export class DiaryInput {
   id?: number
 
   @Field()
+  title!: string
+
+  @Field()
   content!: string
 }
