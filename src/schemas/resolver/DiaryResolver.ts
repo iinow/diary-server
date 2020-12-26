@@ -20,11 +20,11 @@ export class DiaryResolver {
   @Query(() => Diary, { nullable: true })
   diary(
     @Arg('id', { nullable: true }) diaryId: number,
-    @Arg('yyyyMMdd', {
+    @Arg('yyyyMMddHHmm', {
       nullable: true,
       description: '이 매개변수는 로그인이 되어 있어야지만 호출 가능',
     })
-    yyyyMMdd: string,
+    yyyyMMddHHmm: string,
     @AuthUser() user: User
   ): Promise<Diary | undefined> {
     if (diaryId !== undefined) {
@@ -41,9 +41,9 @@ export class DiaryResolver {
                 .createQueryBuilder('diary')
                 .leftJoinAndSelect('diary.user', 'user')
                 .where(
-                  `date_format(diary.created_at, '%Y%m%d') = (:yyyyMMdd)`,
+                  `date_format(diary.created_at, '%Y%m%d%H%i') >= (:yyyyMMddHHmm)`,
                   {
-                    yyyyMMdd,
+                    yyyyMMddHHmm,
                   }
                 )
                 .andWhere('user_uid = (:uid)', { uid: user.uid })
