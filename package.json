@@ -1,7 +1,7 @@
 {
   "name": "diary-server",
   "version": "1.0.0",
-  "description": "graphQL 예제",
+  "description": "Diary Api Server",
   "main": "index.js",
   "scripts": {
     "local": "cross-env TS_NODE_PROJECT=\"build/tsconfig-webpack.json\" npx webpack --config build/webpack.local.config.ts -w",
