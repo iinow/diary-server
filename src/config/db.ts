@@ -1,7 +1,9 @@
 import { Connection, createConnection } from 'typeorm'
 import { from } from 'rxjs'
 import { tap } from 'rxjs/operators'
+import { TypeOrmLoggerAdapter } from '@eropple/typeorm-bunyan-logger'
 import * as Model from '@/model'
+import { log } from '@/config'
 
 let dbClient: Connection
 
@@ -22,6 +24,7 @@ const init = () => {
       timezone: 'Z',
       synchronize: true,
       logging: true,
+      logger: new TypeOrmLoggerAdapter(log),
       entities: [Model.Book, Model.Diary, Model.User, Model.Message],
     })
   )

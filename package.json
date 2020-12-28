@@ -15,9 +15,11 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@eropple/typeorm-bunyan-logger": "^0.1.0",
     "apollo-server": "^2.17.0",
     "apollo-server-express": "^2.17.0",
     "axios": "^0.20.0",
+    "bunyan": "^1.8.14",
     "chance": "^1.1.7",
     "class-validator": "^0.12.2",
     "connect-redis": "^5.0.0",
@@ -33,6 +35,8 @@
     "graphql-subscriptions": "^1.1.0",
     "http": "0.0.1-security",
     "http2": "^3.3.7",
+    "influx": "^5.6.3",
+    "influx-syslog": "^0.2.4",
     "ioredis": "^4.19.2",
     "jsonwebtoken": "^8.5.1",
     "lodash-es": "^4.17.15",
@@ -51,6 +55,7 @@
   "devDependencies": {
     "@apollo/client": "^3.2.9",
     "@types/axios": "^0.14.0",
+    "@types/bunyan": "^1.8.6",
     "@types/chance": "^1.1.0",
     "@types/connect-redis": "0.0.16",
     "@types/cookie-parser": "^1.4.2",

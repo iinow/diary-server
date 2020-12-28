@@ -3,7 +3,7 @@ import { buildSchemaSync } from 'type-graphql'
 import { createServer } from 'http'
 import { Express } from 'express'
 import Resolvers from '@/schemas/resolver'
-import { pubSub } from '@/config'
+import { log, pubSub } from '@/config'
 import { authChecker } from '@/schemas/auth/AuthChecker'
 
 export default (app: Express) => {
@@ -24,7 +24,7 @@ export default (app: Express) => {
     debug: false,
     context: ({ req, res }) => ({ req, res }),
     formatError: (err) => {
-      console.log('에러 발생!', err.originalError)
+      log.error(err.originalError, '에러발생...')
       return err
     },
   })
