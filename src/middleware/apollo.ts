@@ -24,7 +24,7 @@ export default (app: Express) => {
     debug: false,
     context: ({ req, res }) => ({ req, res }),
     formatError: (err) => {
-      log.error(err.originalError, '에러발생...')
+      log.error({ error: err.originalError }, '에러발생...')
       return err
     },
   })

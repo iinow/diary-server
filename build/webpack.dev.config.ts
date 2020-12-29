@@ -3,6 +3,7 @@ import webpack from 'webpack'
 import { Env, baseConfig } from './webpack.base.config'
 
 const env: Env = {
+  profiles: 'dev',
   serverPort: 7711,
   redisHost: 'localhost',
   redisPort: 6379,
@@ -17,6 +18,11 @@ const env: Env = {
   oauthKakaoClientSecret: '5CWqDOhlz3wnJd17RR1rwYLMfGMamhUh',
   oauthKakaoCallbackUrl: 'http://localhost:7711/oauth/kakao/callback',
   jwtSecret: 'HAHAHA',
+  influx: {
+    host: '192.168.0.24',
+    port: 8101,
+    database: 'ha',
+  },
 }
 
 const config = smart({

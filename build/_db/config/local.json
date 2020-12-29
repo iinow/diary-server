@@ -1,10 +1,10 @@
 {
   "local": {
-    "host": "localhost",
+    "host": "192.168.0.24",
     "user": "root",
     "password": "qlalfqjsghekd",
-    "database": "routing_d",
-    "port": 3307,
+    "database": "diary",
+    "port": 3306,
     "driver": "mysql",
     "multipleStatements": true
   },

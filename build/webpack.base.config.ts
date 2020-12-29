@@ -39,7 +39,14 @@ const config: webpack.Configuration = smart({
   plugins: [new ESLintPlugin()],
 })
 
+type Influx = {
+  host: string
+  port: number
+  database: string
+}
+
 export interface Env {
+  profiles: string
   serverPort: number
   redisHost: string
   redisPort: number
@@ -54,6 +61,7 @@ export interface Env {
   oauthKakaoClientSecret: string
   oauthKakaoCallbackUrl: string
   jwtSecret: string
+  influx: Influx
 }
 
 export { config as baseConfig }

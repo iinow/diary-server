@@ -2,12 +2,31 @@
 
 ## 구성 
 
-* typescript 
-* express 
-* graphql 
-* apollo 
+* typescript
+* express
+* graphql
+* apollo
 * type-graphql
 * typeorm
+* bunyan
+* db
+  * influx
+  * mysql
+  * redis
+
+## Getting Started 
+
+```shell script
+npm i
+# update local db (host, user, password, database, port)
+vim build/_db/config/local.json
+
+npm run migrate:local-up
+
+# update local db (host, user, password, database, port)
+vim build/webpack.local.config.ts
+npm run local
+```
 
 ## 기능
 
