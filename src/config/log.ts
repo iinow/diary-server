@@ -67,5 +67,3 @@ log.addStream({
   level: 'debug',
   type: 'raw',
 })
-
-log.debug('number: %s', process.env.testList)
