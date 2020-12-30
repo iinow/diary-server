@@ -1,7 +1,7 @@
 import { Connection, createConnection } from 'typeorm'
 import { from } from 'rxjs'
 import { tap } from 'rxjs/operators'
-import { TypeOrmLoggerAdapter } from '@eropple/typeorm-bunyan-logger'
+import { TypeOrmLoggerAdapter } from '@/config/bunyan/TypeOrmLoggerAdapter'
 import * as Model from '@/model'
 import { log } from '@/config'
 
