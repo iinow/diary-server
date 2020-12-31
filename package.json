@@ -1,6 +1,6 @@
 {
   "name": "diary-server",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "Diary Api Server",
   "main": "index.js",
   "scripts": {
@@ -10,7 +10,8 @@
     "build:real": "npx webpack --config build/webpack.real.config.js",
     "migrate:local:create": "npx db-migrate create seed --config build/_db/config/local.json -e local -m build/_db/migrations",
     "migrate:local-up": "npx db-migrate up seed --config build/_db/config/local.json -e local -m build/_db/migrations",
-    "migrate:local-down": "npx db-migrate down seed --config build/_db/config/local.json -e local -m build/_db/migrations"
+    "migrate:local-down": "npx db-migrate down seed --config build/_db/config/local.json -e local -m build/_db/migrations",
+    "test": "mocha -r ts-node/register ./src/**/*.test.ts"
   },
   "author": "",
   "license": "ISC",
@@ -58,6 +59,7 @@
     "@apollo/client": "^3.2.9",
     "@types/axios": "^0.14.0",
     "@types/bunyan": "^1.8.6",
+    "@types/chai": "^4.2.14",
     "@types/chance": "^1.1.0",
     "@types/connect-redis": "0.0.16",
     "@types/cookie-parser": "^1.4.2",
@@ -65,6 +67,7 @@
     "@types/express-session": "^1.17.3",
     "@types/ioredis": "^4.17.8",
     "@types/jsonwebtoken": "^8.5.0",
+    "@types/mocha": "^8.2.0",
     "@types/moment": "^2.13.0",
     "@types/node": "^14.0.1",
     "@types/passport": "^1.0.4",
@@ -76,12 +79,14 @@
     "@types/webpack-merge": "^4.1.5",
     "@typescript-eslint/eslint-plugin": "^4.8.2",
     "@typescript-eslint/parser": "^4.8.2",
+    "chai": "^4.2.0",
     "eslint": "^7.14.0",
     "eslint-config-airbnb-base": "^14.2.1",
     "eslint-config-prettier": "^6.15.0",
     "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-prettier": "^3.1.4",
     "eslint-webpack-plugin": "^2.4.0",
+    "mocha": "^8.2.1",
     "nodemon": "^2.0.3",
     "nodemon-webpack-plugin": "^4.0.3",
     "prettier": "^2.0.5",
