@@ -1,0 +1,11 @@
+language: node_js
+branches:
+  only:
+    - develop
+node_js:
+  - node
+install:
+  - npm install
+  - npm run build:dev
+script:
+  - npm run test

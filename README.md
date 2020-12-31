@@ -1,5 +1,9 @@
 # Diary Server
 
+[![Build Status](https://travis-ci.org/iinow/diary-server.svg?branch=develop)](https://travis-ci.org/iinow/diary-server) 
+
+[![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=iinow_diary-server&metric=code_smells)](https://sonarcloud.io/dashboard?id=iinow_diary-server) [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=iinow_diary-server&metric=coverage)](https://sonarcloud.io/dashboard?id=iinow_diary-server) 
+
 ## 구성 
 
 * typescript
