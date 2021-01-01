@@ -1,8 +1,9 @@
-import { Provider } from '@/common/constants'
-import { User } from '@/model'
 import { from, of } from 'rxjs'
 import { map, switchMap } from 'rxjs/operators'
 import { v4 as uuid } from 'uuid'
+import { Provider } from '@/common/constants'
+import { User } from '@/model'
+import { UserMeOut } from '@/schemas/out'
 
 type registerUser = {
   id: string
@@ -10,7 +11,7 @@ type registerUser = {
   provider: Provider
 }
 
-export const register = (profile: registerUser) => {
+export function register(profile: registerUser) {
   return from(
     User.findOne({ userId: profile.id, provider: profile.provider })
   ).pipe(
@@ -26,4 +27,13 @@ export const register = (profile: registerUser) => {
       return from(User.insert(newUser)).pipe(map(() => newUser))
     })
   )
+}
+
+export function rememberMe(user: User) {
+  return of(new UserMeOut(user!)).toPromise()
+}
+
+export default {
+  register,
+  rememberMe,
 }
