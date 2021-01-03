@@ -1,6 +1,6 @@
 import { Provider } from '@/common/constants'
 import { User } from '@/model'
-import { Field, ObjectType } from 'type-graphql'
+import { Directive, Field, ObjectType } from 'type-graphql'
 
 @ObjectType()
 export class UserMeOut {
@@ -17,6 +17,7 @@ export class UserMeOut {
   @Field(() => String, { description: '이름' })
   name!: string
 
+  @Directive('@lowercase')
   @Field(() => Provider, { description: 'Social login provider' })
   provider!: Provider
 
