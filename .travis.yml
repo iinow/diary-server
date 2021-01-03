@@ -9,7 +9,8 @@ install:
   - npm run build:dev
 script:
   - npm install codecov -g
-  # - npm run test
-after_success:
-  - codecov
+  - npm test
+  - codecov -f coverage/*.json
+# after_success:
+  # - codecov
 # - bash <(curl -s https://codecov.io/bash)
