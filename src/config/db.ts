@@ -2,7 +2,7 @@ import { Connection, createConnection } from 'typeorm'
 import { from } from 'rxjs'
 import { tap } from 'rxjs/operators'
 import { TypeOrmLoggerAdapter } from '@/config/bunyan/TypeOrmLoggerAdapter'
-import * as Model from '@/model'
+import Entities from '@/model'
 import { log } from '@/config'
 
 let dbClient: Connection
@@ -25,7 +25,7 @@ const init = () => {
       synchronize: true,
       logging: true,
       logger: new TypeOrmLoggerAdapter(log),
-      entities: [Model.Book, Model.Diary, Model.User, Model.Message],
+      entities: [...Entities],
     })
   )
     .pipe(tap((con) => (dbClient = con)))
