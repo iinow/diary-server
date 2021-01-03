@@ -18,6 +18,8 @@ module.exports = {
     'import/no-unresolved': 'off',
     'prettier/prettier': 'error',
     'prefer-spread': 'off',
+    'import/no-extraneous-dependencies': 'off',
+    'import/extensions': 'off',
   },
   ignorePatterns: ['node_modules/', 'dist/', 'build/_db/migrations/'],
 }
