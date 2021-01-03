@@ -8,4 +8,8 @@ install:
   - npm install
   - npm run build:dev
 script:
-  - npm run test
+  - npm install codecov -g
+  # - npm run test
+after_success:
+  - codecov
+# - bash <(curl -s https://codecov.io/bash)
