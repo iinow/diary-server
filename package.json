@@ -12,9 +12,8 @@
     "migrate:local-up": "npx db-migrate up seed --config build/_db/config/local.json -e local -m build/_db/migrations",
     "migrate:local-down": "npx db-migrate down seed --config build/_db/config/local.json -e local -m build/_db/migrations",
     "test:mocha": "mocha -r ts-node/register ./src/**/*.test.ts",
-    "test": "jest",
-    "test:watch": "jest --watch",
-    "coverage": "jest --coverage"
+    "test": "jest --ci --coverage && codecov",
+    "test:watch": "jest --watch"
   },
   "author": "",
   "license": "ISC",
