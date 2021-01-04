@@ -1,8 +1,6 @@
 # Diary Server
 
-[![Build Status](https://travis-ci.org/iinow/diary-server.svg?branch=develop)](https://travis-ci.org/iinow/diary-server) 
-
-[![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=iinow_diary-server&metric=code_smells)](https://sonarcloud.io/dashboard?id=iinow_diary-server) [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=iinow_diary-server&metric=coverage)](https://sonarcloud.io/dashboard?id=iinow_diary-server) 
+[![Build Status](https://travis-ci.org/iinow/diary-server.svg?branch=develop)](https://travis-ci.org/iinow/diary-server) [![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=iinow_diary-server&metric=code_smells)](https://sonarcloud.io/dashboard?id=iinow_diary-server) [![codecov](https://codecov.io/gh/iinow/diary-server/branch/develop/graph/badge.svg?token=NOZMIQIPQX)](https://codecov.io/gh/iinow/diary-server)
 
 ## 구성 
 
