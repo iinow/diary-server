@@ -45,6 +45,20 @@ type Influx = {
   database: string
 }
 
+type OAuthProvider = {
+  clientId: string
+  clientSecret: string
+  callbackUrl: string
+}
+
+type OAuth = {
+  provider: {
+    kakao: OAuthProvider
+    github: OAuthProvider
+  }
+  webRedirectUrl: string
+}
+
 export interface Env {
   profiles: string
   serverPort: number
@@ -57,9 +71,7 @@ export interface Env {
   mysqlPort: number
   mysqlDatabase: string
   dropSchema: boolean
-  oauthKakaoClientId: string
-  oauthKakaoClientSecret: string
-  oauthKakaoCallbackUrl: string
+  oauth: OAuth
   jwtSecret: string
   influx: Influx
 }

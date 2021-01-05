@@ -5,6 +5,20 @@ declare namespace NodeJS {
     database: string
   }
 
+  type OAuthProvider = {
+    clientId: string
+    clientSecret: string
+    callbackUrl: string
+  }
+
+  type OAuth = {
+    provider: {
+      kakao: OAuthProvider
+      github: OAuthProvider
+    }
+    webRedirectUrl: string
+  }
+
   interface ProcessEnv {
     profiles: 'local' | 'dev'
     serverPort: number
@@ -17,9 +31,7 @@ declare namespace NodeJS {
     mysqlPort: number
     mysqlDatabase: string
     dropSchema: boolean
-    oauthKakaoClientId: string
-    oauthKakaoClientSecret: string
-    oauthKakaoCallbackUrl: string
+    oauth: OAuth
     jwtSecret: string
     influx: Influx
   }
