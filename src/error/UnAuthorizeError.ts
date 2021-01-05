@@ -6,3 +6,5 @@ export class UnAuthorizeError extends ApolloError {
     super('로그인을 해주세요.', ErrorType.UN_AUTH)
   }
 }
+
+export const unAuthorizeError = new UnAuthorizeError()

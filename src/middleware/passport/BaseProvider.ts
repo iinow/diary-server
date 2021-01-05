@@ -1,6 +1,6 @@
 import passport, { Strategy } from 'passport'
 import jwt from 'jsonwebtoken'
-import { RequestHandler, Express } from 'express'
+import { RequestHandler, Express, Response } from 'express'
 import moment from 'moment'
 import { User } from '@/model'
 import { getJwtObject } from '@/model/type/JwtObject'
@@ -35,18 +35,21 @@ export class BaseProvider {
     return (req, res) => {
       const user = req.user as User
       if (user) {
-        const token = jwt.sign(getJwtObject(user), process.env.jwtSecret, {
-          expiresIn: 60 * 60,
-        })
-
-        res.cookie(AUTH_TOKEN_NAME, token, {
-          expires: moment().add('hour', 1).toDate(),
-        })
         res.redirect(process.env.oauth.webRedirectUrl)
         return
       }
       res.redirect('/')
     }
+  }
+
+  private setCookieJwt(user: User, res: Response): void {
+    const token = jwt.sign(getJwtObject(user), process.env.jwtSecret, {
+      expiresIn: 60 * 60,
+    })
+
+    res.cookie(AUTH_TOKEN_NAME, token, {
+      expires: moment().add('hour', 1).toDate(),
+    })
   }
 
   public setMiddleware(app: Express) {

@@ -2,7 +2,7 @@ import { from, of, throwError } from 'rxjs'
 import { map } from 'rxjs/operators'
 import { flatMap } from 'rxjs/internal/operators'
 import { Diary, User } from '@/model'
-import { UnAuthorizeError } from '@/error'
+import { unAuthorizeError } from '@/error'
 import { DiaryInput, PaginationInput } from '@/schemas/input'
 import { InsertAndUpdateDiaryOut, PaginatedDiaryResponse } from '@/schemas/out'
 
@@ -18,7 +18,7 @@ export function findOneDiaryByUserAndCreatedAt(
     .pipe(
       flatMap(() =>
         user === undefined
-          ? throwError(new UnAuthorizeError())
+          ? throwError(unAuthorizeError)
           : Diary.getRepository()
               .createQueryBuilder('diary')
               .leftJoinAndSelect('diary.user', 'user')

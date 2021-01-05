@@ -1,1 +1,1 @@
-export { UnAuthorizeError } from '@/error/UnAuthorizeError'
+export { unAuthorizeError } from '@/error/UnAuthorizeError'
