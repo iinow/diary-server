@@ -4,6 +4,7 @@ export const AUTH_TOKEN_NAME = 'D_TOKEN'
 
 export enum Provider {
   KAKAO = 'KA',
+  GITHUB = 'GH',
 }
 
 registerEnumType(Provider, {
