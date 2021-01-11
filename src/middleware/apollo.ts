@@ -4,7 +4,7 @@ import { createServer } from 'http'
 import { Express } from 'express'
 import Resolvers from '@/schemas/resolver'
 import { log, pubSub } from '@/config'
-import { authChecker } from '@/schemas/auth/AuthChecker'
+import authChecker from '@/schemas/auth'
 
 export default (app: Express) => {
   const apollo = new ApolloServer({

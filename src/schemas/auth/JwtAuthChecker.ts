@@ -13,7 +13,7 @@ type Context = {
   res: Response
 }
 
-export const authChecker: AuthChecker<Context> = ({ context: { req } }) => {
+export const jwtAuthChecker: AuthChecker<Context> = ({ context: { req } }) => {
   return of(req.cookies[AUTH_TOKEN_NAME])
     .pipe(
       map((token) => jwt.verify(token, process.env.jwtSecret) as JwtObject),
