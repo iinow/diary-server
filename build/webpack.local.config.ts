@@ -24,8 +24,8 @@ const env: Env = {
         callbackUrl: 'http://localhost:7711/oauth/kakao/callback',
       },
       github: {
-        clientId: '46d7f30dfe4e000b5f83',
-        clientSecret: '6134dd8bfb91525e286f54be24ad1166aedad5a8',
+        clientId: '9aea5e967ca935d0faef',
+        clientSecret: 'f2cba3fc114c0df20929b248ad1485e72ca66f02',
         callbackUrl: 'http://localhost:7711/oauth/github/callback',
       },
     },

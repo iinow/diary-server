@@ -6,6 +6,7 @@
   "scripts": {
     "local": "cross-env TS_NODE_PROJECT=\"build/tsconfig-webpack.json\" npx webpack --config build/webpack.local.config.ts -w",
     "build:local": "cross-env TS_NODE_PROJECT=\"build/tsconfig-webpack.json\" npx webpack --config build/webpack.local.config.ts",
+    "dev": "cross-env TS_NODE_PROJECT=\"build/tsconfig-webpack.json\" npx webpack --config build/webpack.dev.config.ts -w",
     "build:dev": "cross-env TS_NODE_PROJECT=\"build/tsconfig-webpack.json\" npx webpack --config build/webpack.dev.config.ts",
     "build:real": "npx webpack --config build/webpack.real.config.js",
     "migrate:local:create": "npx db-migrate create seed --config build/_db/config/local.json -e local -m build/_db/migrations",
