@@ -20,6 +20,7 @@ module.exports = {
     'prefer-spread': 'off',
     'import/no-extraneous-dependencies': 'off',
     'import/extensions': 'off',
+    'no-param-reassign': 0,
   },
   ignorePatterns: ['node_modules/', 'dist/', 'build/_db/migrations/'],
 }

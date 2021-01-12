@@ -5,17 +5,25 @@ import { Env, baseConfig } from './webpack.base.config'
 const NodemonPlugin = require('nodemon-webpack-plugin')
 
 const env: Env = {
-  profiles: 'local',
-  serverPort: 7711,
-  redisHost: 'localhost',
-  redisPort: 6379,
-  dbType: 'mysql',
-  mysqlDatabase: 'diary',
-  mysqlHost: '192.168.0.24',
-  mysqlPassword: 'qlalfqjsghekd',
-  mysqlPort: 3306,
-  mysqlUsername: 'root',
-  dropSchema: false,
+  server: {
+    profiles: 'local',
+    port: 7711,
+  },
+  redis: {
+    host: 'localhost',
+    port: 6379,
+  },
+  typeOrm: {
+    dbType: 'mysql',
+    dropSchema: false,
+  },
+  mysql: {
+    host: '192.168.0.24',
+    port: 3306,
+    username: 'root',
+    password: 'qlalfqjsghekd',
+    database: 'diary',
+  },
   oauth: {
     provider: {
       kakao: {
