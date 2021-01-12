@@ -1,4 +1,28 @@
 declare namespace NodeJS {
+  type Server = {
+    profiles: string
+    port: number
+  }
+
+  type Redis = {
+    host: string
+    port: number
+    password?: string
+  }
+
+  type MySql = {
+    host: string
+    username: string
+    password: string
+    port: number
+    database: string
+  }
+
+  type TypeOrm = {
+    dbType: 'mysql' | 'mariadb'
+    dropSchema: boolean
+  }
+
   type Influx = {
     host: string
     port: number
@@ -20,17 +44,10 @@ declare namespace NodeJS {
   }
 
   interface ProcessEnv {
-    profiles: 'local' | 'dev'
-    serverPort: number
-    redisHost: string
-    redisPort: number
-    dbType: 'mysql' | 'mariadb'
-    mysqlHost: string
-    mysqlUsername: string
-    mysqlPassword: string
-    mysqlPort: number
-    mysqlDatabase: string
-    dropSchema: boolean
+    server: Server
+    redis: Redis
+    mysql: MySql
+    typeOrm: TypeOrm
     oauth: OAuth
     jwtSecret: string
     influx: Influx

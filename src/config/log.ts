@@ -33,7 +33,7 @@ const createLogMessage = (logObj: BunyanLogObjectWithQuery) => {
 
 const createLogObject = (logObj: BunyanLogObjectWithQuery) => {
   const { time, level, name, pid, hostname } = logObj
-  const { appname = process.env.profiles, facility = name } = logObj
+  const { appname = process.env.server.profiles, facility = name } = logObj
   const severity = getSyslogSeverityLevel(level)
   const tags = { severity, appname, facility, hostname, host: hostname }
   const timestamp = `${time.getTime()}000000`

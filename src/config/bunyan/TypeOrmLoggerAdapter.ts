@@ -13,6 +13,9 @@ export class TypeOrmLoggerAdapter implements Logger {
     parameters?: any[] | undefined,
     queryRunner?: import('typeorm').QueryRunner | undefined
   ) {
+    if (!parameters) {
+      parameters = []
+    }
     this.logger.debug({ query }, parameters, 'SQL query')
   }
 
@@ -22,6 +25,9 @@ export class TypeOrmLoggerAdapter implements Logger {
     parameters?: any[] | undefined,
     queryRunner?: import('typeorm').QueryRunner | undefined
   ) {
+    if (!parameters) {
+      parameters = []
+    }
     this.logger.error({ query }, error)
   }
 
@@ -31,6 +37,9 @@ export class TypeOrmLoggerAdapter implements Logger {
     parameters?: any[] | undefined,
     queryRunner?: import('typeorm').QueryRunner | undefined
   ) {
+    if (!parameters) {
+      parameters = []
+    }
     this.logger.warn({ time, query })
   }
 

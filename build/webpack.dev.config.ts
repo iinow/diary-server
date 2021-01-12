@@ -3,17 +3,25 @@ import webpack from 'webpack'
 import { Env, baseConfig } from './webpack.base.config'
 
 const env: Env = {
-  profiles: 'dev',
-  serverPort: 7711,
-  redisHost: '192.168.0.24',
-  redisPort: 6379,
-  dbType: 'mysql',
-  mysqlDatabase: 'diary',
-  mysqlHost: '192.168.0.24',
-  mysqlPassword: 'qlalfqjsghekd',
-  mysqlPort: 3306,
-  mysqlUsername: 'root',
-  dropSchema: false,
+  server: {
+    profiles: 'dev',
+    port: 7711,
+  },
+  redis: {
+    host: '192.168.0.24',
+    port: 6379,
+  },
+  typeOrm: {
+    dbType: 'mysql',
+    dropSchema: false,
+  },
+  mysql: {
+    host: '192.168.0.24',
+    port: 3306,
+    username: 'root',
+    password: 'qlalfqjsghekd',
+    database: 'diary',
+  },
   oauth: {
     provider: {
       kakao: {
@@ -27,7 +35,7 @@ const env: Env = {
         callbackUrl: 'http://iinow.synology.me:7711/oauth/github/callback',
       },
     },
-    webRedirectUrl: 'http://localhost:3000',
+    webRedirectUrl: 'http://iinow.synology.me:3000',
   },
   jwtSecret: 'HAHAHA',
   influx: {

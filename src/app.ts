@@ -8,8 +8,8 @@ const app = express()
 async function bootstrap() {
   const httpServer = initializeMiddleware(app)
 
-  httpServer.listen(process.env.serverPort, () => {
-    log.debug(`server listen!!!, port: ${process.env.serverPort}`)
+  httpServer.listen(process.env.server.port, () => {
+    log.debug(`server listen!!!, port: ${process.env.server.port}`)
   })
 }
 

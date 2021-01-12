@@ -13,14 +13,14 @@ const init = () => {
   }
   return from(
     createConnection({
-      type: process.env.dbType,
+      type: process.env.typeOrm.dbType,
       charset: 'utf8mb4',
-      port: process.env.mysqlPort,
-      username: process.env.mysqlUsername,
-      password: process.env.mysqlPassword,
-      database: process.env.mysqlDatabase,
-      host: process.env.mysqlHost,
-      dropSchema: process.env.dropSchema,
+      port: process.env.mysql.port,
+      username: process.env.mysql.username,
+      password: process.env.mysql.password,
+      database: process.env.mysql.database,
+      host: process.env.mysql.host,
+      dropSchema: process.env.typeOrm.dropSchema,
       timezone: 'Z',
       synchronize: true,
       logging: true,
