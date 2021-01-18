@@ -17,6 +17,7 @@ export const kakao = new BaseProvider(
       register({
         id: profile.id,
         name: profile.username!,
+        profileImageUrl: profile.photos?.[0]?.value,
         provider: Provider.KAKAO,
       }).subscribe((user) => {
         return done(null, user)

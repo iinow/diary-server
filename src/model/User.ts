@@ -8,7 +8,14 @@ import {
   PrimaryColumn,
   UpdateDateColumn,
 } from 'typeorm'
+import { v4 as uuid } from 'uuid'
 
+export type RegisterUser = {
+  id: string
+  name: string
+  profileImageUrl?: string
+  provider: Provider
+}
 @Entity({
   schema: 'user',
 })
@@ -26,6 +33,10 @@ export class User extends BaseEntity {
   @Field(() => String)
   userName!: string
 
+  @Column({ name: 'profile_image_url' })
+  @Field(() => String)
+  profileImageUrl?: string
+
   @Column({ name: 'provider' })
   @Field()
   provider!: Provider
@@ -37,6 +48,23 @@ export class User extends BaseEntity {
   @CreateDateColumn({ name: 'created_at' })
   @Field(() => Date)
   createAt!: Date
+
+  public static createEntity(profile: RegisterUser): Promise<User> {
+    const newUser = User.create()
+    newUser.uid = uuid()
+    newUser.userId = profile.id
+    newUser.userName = profile.name
+    newUser.provider = profile.provider
+    return newUser.save()
+  }
+
+  public updateEntity(profile: RegisterUser): Promise<User> {
+    this.userName = profile.name
+    this.profileImageUrl = profile.profileImageUrl
+    return this.save({
+      reload: true,
+    })
+  }
 }
 
 export default User

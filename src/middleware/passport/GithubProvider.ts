@@ -33,6 +33,7 @@ export const github = new BaseProvider(
       register({
         id: profile.id,
         name: profile.username!,
+        profileImageUrl: profile.photos?.[0]?.value,
         provider: Provider.GITHUB,
       }).subscribe((user) => {
         return done(null, user)

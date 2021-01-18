@@ -8,6 +8,7 @@ export class UserMeOut {
     this.uuid = user.uid
     this.name = user.userName
     this.provider = user.provider
+    this.profileImageUrl = user.profileImageUrl
     this.createdAt = new Date(user.createAt)
   }
 
@@ -16,6 +17,9 @@ export class UserMeOut {
 
   @Field(() => String, { description: '이름' })
   name!: string
+
+  @Field(() => String, { description: '프로필 이미지 경로' })
+  profileImageUrl?: string
 
   @Directive('@lowercase')
   @Field(() => Provider, { description: 'Social login provider' })
