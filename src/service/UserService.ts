@@ -1,30 +1,18 @@
 import { from, of } from 'rxjs'
-import { map, switchMap } from 'rxjs/operators'
-import { v4 as uuid } from 'uuid'
-import { Provider } from '@/common/constants'
+import { switchMap } from 'rxjs/operators'
 import { User } from '@/model'
+import type { RegisterUser } from '@/model/User'
 import { UserMeOut } from '@/schemas/out'
 
-type registerUser = {
-  id: string
-  name: string
-  provider: Provider
-}
-
-export function register(profile: registerUser) {
+export function register(profile: RegisterUser) {
   return from(
     User.findOne({ userId: profile.id, provider: profile.provider })
   ).pipe(
     switchMap((user) => {
       if (user) {
-        return of(user)
+        return from(user.updateEntity(profile))
       }
-      const newUser = User.create()
-      newUser.uid = uuid()
-      newUser.userId = profile.id
-      newUser.userName = profile.name
-      newUser.provider = profile.provider
-      return from(User.insert(newUser)).pipe(map(() => newUser))
+      return from(User.createEntity(profile))
     })
   )
 }
