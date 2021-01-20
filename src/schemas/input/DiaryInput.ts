@@ -5,6 +5,9 @@ export class DiaryInput {
   @Field({ nullable: true })
   id?: number
 
+  @Field({ nullable: false })
+  journalId!: number
+
   @Field()
   title!: string
 

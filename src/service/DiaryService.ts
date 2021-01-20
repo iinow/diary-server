@@ -1,7 +1,7 @@
 import { from, of, throwError } from 'rxjs'
-import { map } from 'rxjs/operators'
+import { filter, map } from 'rxjs/operators'
 import { flatMap } from 'rxjs/internal/operators'
-import { Diary, User } from '@/model'
+import { Diary, Journal, User } from '@/model'
 import { unAuthorizeError } from '@/error'
 import { DiaryInput, PaginationInput } from '@/schemas/input'
 import { InsertAndUpdateDiaryOut, PaginatedDiaryResponse } from '@/schemas/out'
@@ -40,19 +40,33 @@ export function findOneDiaryByUserAndCreatedAt(
 export function insertAndUpdate(user: User, diaryInput: DiaryInput) {
   return of(diaryInput)
     .pipe(
-      flatMap((diary: DiaryInput) => {
-        if (!diary.id) {
-          return Promise.resolve(Diary.create())
-        }
-        return Diary.findOne({ id: diaryInput.id, user })
+      flatMap(() => {
+        return Journal.findOne({
+          where: {
+            id: diaryInput.journalId,
+          },
+        })
       }),
-      map((diary) => {
-        let newDiary = diary
-        if (!newDiary?.id) {
-          newDiary = Diary.createEntity(user)
+      flatMap((journal) => {
+        if (!journal) {
+          return throwError(unAuthorizeError)
         }
-        newDiary.updateDiaryInput(diaryInput)
-        return newDiary
+        if (!diaryInput.id) {
+          return Promise.resolve(Diary.createEntity(journal))
+        }
+        return Diary.findOne({
+          where: {
+            id: diaryInput.id,
+            journal,
+          },
+        })
+      }),
+      flatMap((diary) => {
+        if (!diary) {
+          return throwError(unAuthorizeError).toPromise()
+        }
+        diary.updateDiaryInput(diaryInput)
+        return of(diary)
       }),
       flatMap((diary) => diary.save()),
       map((diary) => new InsertAndUpdateDiaryOut(diary))
@@ -62,21 +76,31 @@ export function insertAndUpdate(user: User, diaryInput: DiaryInput) {
 
 export function findDiaryByUserOrderCreatedDesc(
   user: User,
-  pagination: PaginationInput
+  pagination: PaginationInput,
+  journalId: number
 ): Promise<PaginatedDiaryResponse> {
   return from(
-    Diary.findAndCount({
+    Journal.findOne({
       where: {
+        id: journalId,
         user,
       },
-      order: {
-        createdAt: 'DESC',
-      },
-      take: pagination.cntPageItem,
-      skip: (pagination.page - 1) * pagination.cntPageItem,
     })
   )
     .pipe(
+      filter((journal) => journal !== undefined),
+      flatMap((journal) =>
+        Diary.findAndCount({
+          where: {
+            journal,
+          },
+          order: {
+            createdAt: 'DESC',
+          },
+          take: pagination.cntPageItem,
+          skip: (pagination.page - 1) * pagination.cntPageItem,
+        })
+      ),
       map((res) => {
         const [items, total] = res
         const hasMore: boolean =
