@@ -6,5 +6,5 @@ export class PaginationInput {
   page!: number
 
   @Field(() => Int, { description: '페이지 당 아이템 개수' })
-  pageItemCount!: number
+  cntPageItem!: number
 }

@@ -41,19 +41,17 @@ export function insertAndUpdate(user: User, diaryInput: DiaryInput) {
   return of(diaryInput)
     .pipe(
       flatMap((diary: DiaryInput) => {
-        if (diary.id === undefined) {
+        if (!diary.id) {
           return Promise.resolve(Diary.create())
         }
         return Diary.findOne({ id: diaryInput.id, user })
       }),
       map((diary) => {
         let newDiary = diary
-        if (newDiary === undefined || newDiary.id === undefined) {
-          newDiary = Diary.create()
-          newDiary.user = user
+        if (!newDiary?.id) {
+          newDiary = Diary.createEntity(user)
         }
-        newDiary.title = diaryInput.title
-        newDiary.content = diaryInput.content
+        newDiary.updateDiaryInput(diaryInput)
         return newDiary
       }),
       flatMap((diary) => diary.save()),
@@ -74,15 +72,15 @@ export function findDiaryByUserOrderCreatedDesc(
       order: {
         createdAt: 'DESC',
       },
-      take: pagination.pageItemCount,
-      skip: (pagination.page - 1) * pagination.pageItemCount,
+      take: pagination.cntPageItem,
+      skip: (pagination.page - 1) * pagination.cntPageItem,
     })
   )
     .pipe(
       map((res) => {
         const [items, total] = res
         const hasMore: boolean =
-          pagination.page * pagination.pageItemCount < total
+          pagination.page * pagination.cntPageItem < total
         return { items, total, hasMore, ...pagination }
       })
     )
