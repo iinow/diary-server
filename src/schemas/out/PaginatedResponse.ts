@@ -15,7 +15,7 @@ export default function PaginatedResponse<TItemsFieldValue>(
     page!: number
 
     @Field(() => Int)
-    pageItemCount!: number
+    cntPageItem!: number
 
     @Field(() => Boolean)
     hasMore!: boolean

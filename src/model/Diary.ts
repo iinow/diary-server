@@ -10,6 +10,7 @@ import {
   UpdateDateColumn,
 } from 'typeorm'
 import { User } from '@/model/User'
+import { DiaryInput } from '@/schemas/input'
 
 @Entity({
   schema: 'diary',
@@ -44,6 +45,17 @@ export class Diary extends BaseEntity {
   @CreateDateColumn({ name: 'created_at' })
   @Field(() => Date, { description: '등록 날짜' })
   createdAt!: Date
+
+  public static createEntity(user: User) {
+    const res = this.create()
+    res.user = user
+    return res
+  }
+
+  public updateDiaryInput(diaryInput: DiaryInput) {
+    this.title = diaryInput.title
+    this.content = diaryInput.content
+  }
 }
 
 export default Diary
