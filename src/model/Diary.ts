@@ -9,8 +9,8 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm'
-import { User } from '@/model/User'
 import { DiaryInput } from '@/schemas/input'
+import Journal from '@/model/Journal'
 
 @Entity({
   schema: 'diary',
@@ -21,14 +21,14 @@ export class Diary extends BaseEntity {
   @Field(() => Int)
   id!: number
 
-  @ManyToOne(() => User, {
+  @ManyToOne(() => Journal, {
     onDelete: 'NO ACTION',
     onUpdate: 'NO ACTION',
     eager: false,
     lazy: true,
   })
-  @JoinColumn([{ name: 'user_uid', referencedColumnName: 'uid' }])
-  user!: User
+  @JoinColumn([{ name: 'journal_id', referencedColumnName: 'id' }])
+  journal!: Journal
 
   @Column({ name: 'title' })
   @Field(() => String, { description: '일기 제목' })
@@ -46,9 +46,9 @@ export class Diary extends BaseEntity {
   @Field(() => Date, { description: '등록 날짜' })
   createdAt!: Date
 
-  public static createEntity(user: User) {
+  public static createEntity(journal: Journal) {
     const res = this.create()
-    res.user = user
+    res.journal = journal
     return res
   }
 
