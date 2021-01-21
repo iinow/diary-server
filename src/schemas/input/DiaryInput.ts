@@ -1,11 +1,11 @@
-import { Field, InputType } from 'type-graphql'
+import { Field, InputType, Int } from 'type-graphql'
 
 @InputType()
 export class DiaryInput {
-  @Field({ nullable: true })
+  @Field(() => Int, { nullable: true })
   id?: number
 
-  @Field({ nullable: false })
+  @Field(() => Int, { nullable: false })
   journalId!: number
 
   @Field()

@@ -12,7 +12,8 @@ export function findOneDiaryById(id: number) {
 
 export function findOneDiaryByUserAndCreatedAt(
   user: User,
-  yyyyMMddHHmm: string
+  yyyyMMddHHmm: string,
+  journalId: number
 ) {
   return of({})
     .pipe(
@@ -21,14 +22,14 @@ export function findOneDiaryByUserAndCreatedAt(
           ? throwError(unAuthorizeError)
           : Diary.getRepository()
               .createQueryBuilder('diary')
-              .leftJoinAndSelect('diary.user', 'user')
+              .leftJoinAndSelect('diary.journal', 'journal')
               .where(
                 `date_format(diary.created_at, '%Y%m%d%H%i') >= (:yyyyMMddHHmm)`,
                 {
                   yyyyMMddHHmm,
                 }
               )
-              .andWhere('user_uid = (:uid)', { uid: user.uid })
+              .andWhere('journal_id = (:journalId)', { journalId })
               .limit(1)
               .getRawAndEntities()
       ),
