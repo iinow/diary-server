@@ -43,7 +43,7 @@ export class DiaryResolver {
 
   @Query(() => Diary, { nullable: true, description: '일기 아이디로 검색' })
   diaryById(
-    @Arg('id', () => Int, { nullable: true }) diaryId: number
+    @Arg('id', () => Int, { nullable: false }) diaryId: number
   ): Promise<Diary | undefined> {
     return findOneDiaryById(diaryId)
   }
