@@ -7,7 +7,7 @@ import { DiaryInput, PaginationInput } from '@/schemas/input'
 import { InsertAndUpdateDiaryOut, PaginatedDiaryResponse } from '@/schemas/out'
 
 export function findOneDiaryById(id: number) {
-  return from(Diary.findOne({ id }, { relations: ['user'] })).toPromise()
+  return from(Diary.findOne({ id })).toPromise()
 }
 
 export function findOneDiaryByUserAndCreatedAt(
