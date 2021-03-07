@@ -23,7 +23,8 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v2
+      - name: ffjfjfjfjf
+        uses: actions/checkout@v2
         with:
           script: echo '{"botName: "서버 배포 봇", text: "${{ github.event.head_commit.message }}"}'
 
