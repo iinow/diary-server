@@ -24,9 +24,9 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - name: ffjfjfjfjf
-        uses: actions/checkout@v2
+        uses: appleboy/ssh-action@v0.1.4
         with:
-          script: echo '{"botName: "서버 배포 봇", text: "${{ github.event.head_commit.message }}"}'
+          script: whoami
 
       # Runs a single command using the runners shell
       - name: Run a one-line script
