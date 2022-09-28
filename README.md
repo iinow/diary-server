@@ -19,7 +19,7 @@
 ## Getting Started 
 
 ```shell script
-npm i
+npm ci
 # update local db (host, user, password, database, port)
 vim build/_db/config/local.json
 
@@ -31,6 +31,7 @@ npm run local
 ```
 
 ## 기능
+ss
 
 * 일기는 하루에 1개만 작성 가능 저장 버튼을 누르지 않고 자동 저장
 * 메신저 기능
